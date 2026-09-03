@@ -20,3 +20,9 @@ jobs:
             # now that the environment has been setup, we can run all scripts from package.json like we could on our own machine
             - name: Check style
               run: npm run eslint
+            # next up is a step to run tests
+            - name: Run npm tests
+              run: npm run test
+            # lastly build the prod version of our app
+            - name: Run npm build
+              run: npm run build
