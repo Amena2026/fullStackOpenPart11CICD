@@ -1,0 +1,22 @@
+name: Deployment pipeline
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    simple_deployment_pipeline:
+        runs-on: ubuntu-latest
+        steps:
+            # first we need to setup our virtual environment before we build our pipeline
+            - uses: actions/checkout@v6   # fetches code from our repository
+            - uses: actions/setup-node@v6 # install node 
+              with:
+                node-version: '24'
+            # lastly we need to install our app dependencies on the environment
+            - name: install dependencies  
+              run: npm install
+            # now that the environment has been setup, we can run all scripts from package.json like we could on our own machine
+            - name: Check style
+              run: npm run eslint
