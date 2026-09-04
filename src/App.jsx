@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react'
 import { Routes, Route, useMatch } from 'react-router-dom'
 import { useApi } from './useApi'
@@ -14,6 +15,7 @@ const mapResults = (({ results }) => results.map(({ url, name }) => ({
 
 const App = () => {
   const match = useMatch('/pokemon/:name')
+  console.log('App.jsx: match: ', match)
   const { data: pokemonList, error, isLoading } = useApi('https://pokeapi.co/api/v2/pokemon/?limit=50', mapResults)
 
   if (isLoading) {
@@ -28,8 +30,11 @@ const App = () => {
 
   if (match && match.params) {
     const pokemonId = pokemonList.find(({ name }) => name === match.params.name).id
+    console.log('App.jsx: pokemonID: ', pokemonId)
     previous = pokemonList.find(({ id }) => id === pokemonId - 1)
+    console.log('App.jsx: previous: ', previous)
     next = pokemonList.find(({ id }) => id === pokemonId + 1)
+    console.log('App.jsx: next: ', next)
   }
 
   return (
