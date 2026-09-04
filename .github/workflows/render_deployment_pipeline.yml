@@ -1,0 +1,13 @@
+name: render_deployment_pipeline
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    simple_render_deploy_pipeline:
+        runs-on: ubuntu-latest
+        steps:
+            - name: deploy render
+              run: curl ${{ secrets.RENDER_DEPLOY_HOOK}}
